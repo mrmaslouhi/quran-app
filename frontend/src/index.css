@@ -159,4 +159,20 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  button {
+    @apply cursor-pointer
+  }
+}
+
+@font-face {
+  font-family: 'KFGQ';
+  src: url('/public/KFGQ.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-kfgq {
+  font-family: 'KFGQ', system;
 }
