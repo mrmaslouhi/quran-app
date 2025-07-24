@@ -1,18 +1,31 @@
-import Navbar from "./components/ui/Navbar"
-import AyahInfoDiv  from "./components/ui/AyahInfoDiv"
-import AyahCard from "./components/ui/AyahCard"
-import ButtonGroup from "./components/ui/ButtonGroup"
+import { useEffect, useState } from "react";
+import Navbar from "./components/ui/Navbar";
+import Layout from  "./components/ui/Layout"
+import ButtonGroup from "./components/ui/ButtonGroup";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { ThemeProvider } from "@/components/theme-provider";
+import quranData from "./quranData";
+import dateInHijri from "./dateInHijri";
 
 const App = () => {
   return (
-    <div className="px-2 md:px-4 lg:px-6">
-      <Navbar />
-      <AyahInfoDiv surahName="Al-Fatiha" numberOfAyat={7} makkiyaOrMadaniya="Makkiya" />
-      <AyahCard surahNumber={1} ayahNumber='١' ayahNumberInEnglish={1} ayahText={'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ'} tafsir={'In the name of Allah, the Entirely Merciful, the Especially Merciful.'} />
-      <AyahCard surahNumber={1} ayahNumber='٢' ayahNumberInEnglish={2} ayahText={'ٱلْحَمْدُ لِلَّهِ رَبِّ ٱلْعَٰلَمِينَ'} tafsir={'[All] praise is [due] to Allah, Lord of the worlds -'} />
-      <ButtonGroup />
-    </div>
-  )
-}
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="px-2 md:px-4 lg:px-6">
+        <Navbar />
+        <Routes>
+{quranData.map((obj) => {
+  return (
+    <Route
+      key={obj.id}
+      path={`/${obj.id}`}
+      element={<Layout obj={obj} />}
+    />
+  );
+})}
+        </Routes>
+      </div>
+    </ThemeProvider>
+  );
+};
 
-export default App
+export default App;
